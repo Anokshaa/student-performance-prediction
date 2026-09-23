@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Performance Prediction</title>
+</head>
+
+<body>
+    <h1>Student Performance Prediction</h1>
+
+    <p>Enter the student's details below:</p>
+
+    <label>Student Name:</label>
+    <input type="text" id="name"><br><br>
+
+    <label>Previous Marks:</label>
+    <input type="number" id="marks"><br><br>
+
+    <label>Attendance (%):</label>
+    <input type="number" id="attendance"><br><br>
+
+    <button onclick="predict()">Predict Performance</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function predict() {
+            let name = document.getElementById("name").value;
+            let marks = Number(document.getElementById("marks").value);
+            let attendance = Number(document.getElementById("attendance").value);
+
+            let performance;
+
+            if (marks >= 75 && attendance >= 75) {
+                performance = "Excellent";
+            } else if (marks >= 50 && attendance >= 60) {
+                performance = "Good";
+            } else {
+                performance = "Needs Improvement";
+            }
+
+            document.getElementById("result").innerHTML =
+                "Student: " + name + "<br>Performance: " + performance;
+        }
+    </script>
+</body>
+</html>
