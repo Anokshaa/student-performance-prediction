@@ -1,17 +1,17 @@
-# Student Performance Prediction and Analysis
+# Student Performance Prediction
 
 ## Project Description
 
-This project is a simple Python-based system that predicts student performance using previous marks, attendance percentage, and study hours.
+This project is a simple Python-based system that predicts a student's performance using previous marks, attendance percentage, and study hours per day.
 
-The project was further extended to provide personalized recommendations and analyze data of multiple students.
+The system also provides a personalized improvement suggestion and a target marks goal for the student.
 
 ## Objectives
 
 - To predict student performance.
 - To consider study hours along with marks and attendance.
-- To provide personalized recommendations.
-- To analyze performance data of multiple students.
+- To provide personalized improvement suggestions.
+- To give the student a target marks goal.
 - To demonstrate the use of Python and CSV data handling.
 
 ## Technologies Used
@@ -31,40 +31,40 @@ The program takes:
 
 ## Performance Categories
 
+The student's performance is classified into:
+
 - **Excellent**
 - **Good**
 - **Needs Improvement**
 
-## Project Add-ons
+## Project Features
 
 ### 1. Study Hours
 
-Study hours were added as an additional factor for predicting student performance.
+Study hours are considered as an additional factor for predicting student performance.
 
-### 2. Personalized Recommendation
+### 2. Performance Prediction
 
-The program provides a recommendation based on the predicted performance.
+The system predicts the student's performance based on previous marks, attendance, and study hours.
 
-### 3. Multiple Student Analysis
+### 3. Improvement Suggestion
 
-A CSV dataset containing student information is used to calculate:
+The system provides a personalized suggestion to help the student improve their performance.
 
-- Total number of students
-- Average marks
-- Average attendance
-- Average study hours
-- Number of students in each performance category
+### 4. Target Marks
+
+The system gives the student a target marks goal to aim for.
 
 ## Files
 
 - `student_performance.py` – Main Python program.
-- `student_data.csv` – Dataset containing student information.
+- `student_data.csv` – Student data used by the project.
 - `README.md` – Project documentation.
 
 ## Conclusion
 
-This project demonstrates a simple student performance prediction and analysis system using Python. The project was extended by adding study hours, personalized recommendations, and analysis of multiple student records.
+This project demonstrates a simple student performance prediction system using Python. It uses previous marks, attendance, and study hours to predict performance and provides an improvement suggestion and target marks goal for the student.
 
 ## Future Enhancement
 
-The project can be further improved by using Machine Learning techniques and a larger real-world dataset.
+The project can be further improved by using Machine Learning techniques and a larger dataset.
