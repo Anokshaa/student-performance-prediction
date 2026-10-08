@@ -1,58 +1,70 @@
-# Student Performance Prediction
+# Student Performance Prediction and Analysis
 
-## Introduction
+## Project Description
 
-Student performance can be influenced by factors such as previous marks and attendance. This project is a simple Python-based system that predicts a student's performance using these factors.
+This project is a simple Python-based system that predicts student performance using previous marks, attendance percentage, and study hours.
 
-## Objective
+The project was further extended to provide personalized recommendations and analyze data of multiple students.
 
-The main objective of this project is to develop a simple program that classifies student performance based on previous marks and attendance percentage.
+## Objectives
+
+- To predict student performance.
+- To consider study hours along with marks and attendance.
+- To provide personalized recommendations.
+- To analyze performance data of multiple students.
+- To demonstrate the use of Python and CSV data handling.
 
 ## Technologies Used
 
 - Python
 - GitHub
-- CSV Dataset
+- CSV
 
-## Input
+## Input Details
 
-The program takes the following inputs:
+The program takes:
 
 - Student name
 - Previous marks
 - Attendance percentage
+- Study hours per day
 
 ## Performance Categories
 
-The program classifies students into:
+- **Excellent**
+- **Good**
+- **Needs Improvement**
 
-- Excellent
-- Good
-- Needs Improvement
+## Project Add-ons
 
-## Dataset
+### 1. Study Hours
 
-The project includes a small sample dataset containing student names, previous marks, attendance and performance.
+Study hours were added as an additional factor for predicting student performance.
 
-Dataset file:
+### 2. Personalized Recommendation
 
-`student_data.csv`
+The program provides a recommendation based on the predicted performance.
 
-## Python Program
+### 3. Multiple Student Analysis
 
-The main Python program is:
+A CSV dataset containing student information is used to calculate:
 
-`student_performance.py`
+- Total number of students
+- Average marks
+- Average attendance
+- Average study hours
+- Number of students in each performance category
 
-## Sample Output
+## Files
 
-```text
-Enter student name: Anu
-Enter previous marks: 82
-Enter attendance percentage: 88
+- `student_performance.py` – Main Python program.
+- `student_data.csv` – Dataset containing student information.
+- `README.md` – Project documentation.
 
---- Student Performance Result ---
-Student Name: Anu
-Previous Marks: 82.0
-Attendance: 88.0 %
-Performance: Excellent
+## Conclusion
+
+This project demonstrates a simple student performance prediction and analysis system using Python. The project was extended by adding study hours, personalized recommendations, and analysis of multiple student records.
+
+## Future Enhancement
+
+The project can be further improved by using Machine Learning techniques and a larger real-world dataset.
