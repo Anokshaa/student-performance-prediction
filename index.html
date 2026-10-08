@@ -2,45 +2,155 @@
 <html>
 <head>
     <title>Student Performance Prediction</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+        }
+
+        input {
+            margin: 5px;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin-top: 10px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #analysis {
+            margin-top: 30px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Student Performance Prediction</h1>
 
-    <p>Enter the student's details below:</p>
+<h1>Student Performance Prediction and Analysis</h1>
 
-    <label>Student Name:</label>
-    <input type="text" id="name"><br><br>
+<p>Enter the student's details below:</p>
 
-    <label>Previous Marks:</label>
-    <input type="number" id="marks"><br><br>
+<label>Student Name:</label>
+<input type="text" id="name"><br>
 
-    <label>Attendance (%):</label>
-    <input type="number" id="attendance"><br><br>
+<label>Previous Marks:</label>
+<input type="number" id="marks"><br>
 
-    <button onclick="predict()">Predict Performance</button>
+<label>Attendance (%):</label>
+<input type="number" id="attendance"><br>
 
-    <h2 id="result"></h2>
+<label>Study Hours per Day:</label>
+<input type="number" id="studyHours"><br>
 
-    <script>
-        function predict() {
-            let name = document.getElementById("name").value;
-            let marks = Number(document.getElementById("marks").value);
-            let attendance = Number(document.getElementById("attendance").value);
+<button onclick="predictPerformance()">Predict Performance</button>
 
-            let performance;
+<div id="result"></div>
 
-            if (marks >= 75 && attendance >= 75) {
-                performance = "Excellent";
-            } else if (marks >= 50 && attendance >= 60) {
-                performance = "Good";
-            } else {
-                performance = "Needs Improvement";
-            }
+<div id="analysis">
+    <h2>Student Dataset Analysis</h2>
+    <p id="datasetResult">Loading dataset analysis...</p>
+</div>
 
-            document.getElementById("result").innerHTML =
-                "Student: " + name + "<br>Performance: " + performance;
+<script>
+
+function predictPerformance() {
+
+    let name = document.getElementById("name").value;
+    let marks = Number(document.getElementById("marks").value);
+    let attendance = Number(document.getElementById("attendance").value);
+    let studyHours = Number(document.getElementById("studyHours").value);
+
+    let performance;
+    let recommendation;
+
+    if (marks >= 75 && attendance >= 75 && studyHours >= 5) {
+
+        performance = "Excellent";
+        recommendation =
+            "Maintain your current study habits and performance.";
+
+    } else if (marks >= 50 && attendance >= 60 && studyHours >= 3) {
+
+        performance = "Good";
+        recommendation =
+            "Increase study hours and maintain regular attendance.";
+
+    } else {
+
+        performance = "Needs Improvement";
+        recommendation =
+            "Improve attendance, marks and study regularly.";
+    }
+
+    document.getElementById("result").innerHTML =
+        "<h2>Student Performance Result</h2>" +
+        "<b>Student:</b> " + name + "<br>" +
+        "<b>Previous Marks:</b> " + marks + "<br>" +
+        "<b>Attendance:</b> " + attendance + "%<br>" +
+        "<b>Study Hours:</b> " + studyHours + " hours/day<br>" +
+        "<b>Performance:</b> " + performance + "<br>" +
+        "<b>Recommendation:</b> " + recommendation;
+}
+
+
+fetch("student_data.csv")
+.then(response => response.text())
+.then(data => {
+
+    let rows = data.trim().split("\n");
+    let totalStudents = rows.length - 1;
+
+    let totalMarks = 0;
+    let totalAttendance = 0;
+    let totalStudyHours = 0;
+
+    let excellent = 0;
+    let good = 0;
+    let needsImprovement = 0;
+
+    for (let i = 1; i < rows.length; i++) {
+
+        let columns = rows[i].split(",");
+
+        totalMarks += Number(columns[1]);
+        totalAttendance += Number(columns[2]);
+        totalStudyHours += Number(columns[3]);
+
+        if (columns[4] === "Excellent") {
+            excellent++;
+        } else if (columns[4] === "Good") {
+            good++;
+        } else {
+            needsImprovement++;
         }
-    </script>
+    }
+
+    let averageMarks = (totalMarks / totalStudents).toFixed(2);
+    let averageAttendance =
+        (totalAttendance / totalStudents).toFixed(2);
+    let averageStudyHours =
+        (totalStudyHours / totalStudents).toFixed(2);
+
+    document.getElementById("datasetResult").innerHTML =
+        "<b>Total Students:</b> " + totalStudents + "<br>" +
+        "<b>Average Marks:</b> " + averageMarks + "<br>" +
+        "<b>Average Attendance:</b> " + averageAttendance + "%<br>" +
+        "<b>Average Study Hours:</b> " + averageStudyHours +
+        " hours/day<br><br>" +
+
+        "<b>Performance Count:</b><br>" +
+        "Excellent: " + excellent + "<br>" +
+        "Good: " + good + "<br>" +
+        "Needs Improvement: " + needsImprovement;
+});
+
+</script>
+
 </body>
-</html>
+    </html>
