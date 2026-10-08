@@ -23,16 +23,12 @@
             margin-top: 20px;
             font-size: 18px;
         }
-
-        #analysis {
-            margin-top: 30px;
-        }
     </style>
 </head>
 
 <body>
 
-<h1>Student Performance Prediction and Analysis</h1>
+<h1>Student Performance Prediction</h1>
 
 <p>Enter the student's details below:</p>
 
@@ -52,11 +48,6 @@
 
 <div id="result"></div>
 
-<div id="analysis">
-    <h2>Student Dataset Analysis</h2>
-    <p id="datasetResult">Loading dataset analysis...</p>
-</div>
-
 <script>
 
 function predictPerformance() {
@@ -67,25 +58,29 @@ function predictPerformance() {
     let studyHours = Number(document.getElementById("studyHours").value);
 
     let performance;
-    let recommendation;
+    let suggestion;
+    let targetMarks;
 
     if (marks >= 75 && attendance >= 75 && studyHours >= 5) {
 
         performance = "Excellent";
-        recommendation =
+        suggestion =
             "Maintain your current study habits and performance.";
+        targetMarks = Math.min(marks + 5, 100);
 
     } else if (marks >= 50 && attendance >= 60 && studyHours >= 3) {
 
         performance = "Good";
-        recommendation =
+        suggestion =
             "Increase study hours and maintain regular attendance.";
+        targetMarks = Math.min(marks + 10, 100);
 
     } else {
 
         performance = "Needs Improvement";
-        recommendation =
+        suggestion =
             "Improve attendance, marks and study regularly.";
+        targetMarks = Math.min(marks + 15, 100);
     }
 
     document.getElementById("result").innerHTML =
@@ -95,62 +90,11 @@ function predictPerformance() {
         "<b>Attendance:</b> " + attendance + "%<br>" +
         "<b>Study Hours:</b> " + studyHours + " hours/day<br>" +
         "<b>Performance:</b> " + performance + "<br>" +
-        "<b>Recommendation:</b> " + recommendation;
+        "<b>Improvement Suggestion:</b> " + suggestion + "<br>" +
+        "<b>Target Marks:</b> " + targetMarks;
 }
-
-
-fetch("student_data.csv")
-.then(response => response.text())
-.then(data => {
-
-    let rows = data.trim().split("\n");
-    let totalStudents = rows.length - 1;
-
-    let totalMarks = 0;
-    let totalAttendance = 0;
-    let totalStudyHours = 0;
-
-    let excellent = 0;
-    let good = 0;
-    let needsImprovement = 0;
-
-    for (let i = 1; i < rows.length; i++) {
-
-        let columns = rows[i].split(",");
-
-        totalMarks += Number(columns[1]);
-        totalAttendance += Number(columns[2]);
-        totalStudyHours += Number(columns[3]);
-
-        if (columns[4] === "Excellent") {
-            excellent++;
-        } else if (columns[4] === "Good") {
-            good++;
-        } else {
-            needsImprovement++;
-        }
-    }
-
-    let averageMarks = (totalMarks / totalStudents).toFixed(2);
-    let averageAttendance =
-        (totalAttendance / totalStudents).toFixed(2);
-    let averageStudyHours =
-        (totalStudyHours / totalStudents).toFixed(2);
-
-    document.getElementById("datasetResult").innerHTML =
-        "<b>Total Students:</b> " + totalStudents + "<br>" +
-        "<b>Average Marks:</b> " + averageMarks + "<br>" +
-        "<b>Average Attendance:</b> " + averageAttendance + "%<br>" +
-        "<b>Average Study Hours:</b> " + averageStudyHours +
-        " hours/day<br><br>" +
-
-        "<b>Performance Count:</b><br>" +
-        "Excellent: " + excellent + "<br>" +
-        "Good: " + good + "<br>" +
-        "Needs Improvement: " + needsImprovement;
-});
 
 </script>
 
 </body>
-    </html>
+</html>
